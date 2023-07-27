@@ -2,6 +2,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
+const connectDB = require('./config/db');
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
 
 // Call express
@@ -12,6 +13,9 @@ dotenv.config();
 
 // Set port number
 const port = process.env.PORT || 5000;
+
+// Set database connection
+connectDB();
 
 // Set middlewares
 app.use('/api/users', userRoutes);
