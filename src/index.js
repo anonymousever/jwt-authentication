@@ -18,6 +18,8 @@ const port = process.env.PORT || 5000;
 connectDB();
 
 // Set middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/api/users', userRoutes);
 app.use(notFound);
 app.use(errorHandler);
