@@ -4,7 +4,7 @@ const generateToken = require('../utils/generateToken');
 const User = require('../models/userModel');
 
 // Route: POST /api/users
-// Description: Sign up new user
+// Description: Sign up new user and set token
 // Access: Public
 const signupUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -35,7 +35,7 @@ const signupUser = asyncHandler(async (req, res) => {
 });
 
 // Route: POST /api/users/signin
-// Description: Sign in user and set token
+// Description: Sign in user and verify inputs
 // Access: Public
 const signinUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -56,10 +56,15 @@ const signinUser = asyncHandler(async (req, res) => {
 });
 
 // Route: POST /api/users/signout
-// Description: Sign out user
+// Description: Sign out user and destroy cookie
 // Access: Private
 const signoutUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'Sign out user' });
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+
+  res.status(200).json({ message: 'Signed out user.' });
 });
 
 // Route: GET /api/users/profile
