@@ -38,7 +38,21 @@ const signupUser = asyncHandler(async (req, res) => {
 // Description: Sign in user and set token
 // Access: Public
 const signinUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'Sign in user' });
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (user && (await user.matchPassword(password))) {
+    generateToken(res, user._id);
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    });
+  } else {
+    res.status(401);
+    throw new Error('Invalid email or password.');
+  }
 });
 
 // Route: POST /api/users/signout
