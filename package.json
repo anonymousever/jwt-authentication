@@ -1,7 +1,7 @@
 {
   "name": "jwt-authentication",
   "version": "1.0.0",
-  "description": "JWT authentication with node.js",
+  "description": "JWT authentication with node, express and mongodb",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",

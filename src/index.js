@@ -29,5 +29,5 @@ app.use(errorHandler);
 // Start server
 app.listen(
   port,
-  console.log(`Server started in ${process.env.NODE_ENV} mode on port ${port}.`)
+  console.log(`Server started in ${process.env.NODE_ENV} mode on port ${port}`)
 );
